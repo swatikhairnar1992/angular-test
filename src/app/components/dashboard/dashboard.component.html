@@ -1,0 +1,28 @@
+<p>Dashboard</p>
+
+<button mat-raised-button color="primary" mat-button (click)="logOut()">Log out</button>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="first_name">
+        <th mat-header-cell *matHeaderCellDef> First Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.first_name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="last_name">
+        <th mat-header-cell *matHeaderCellDef> Last Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.last_name}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<button mat-button color="primary" [disabled]="selectedPageNumber <= 1" (click)="setPage(selectedPageNumber-1)"
+    [ngStyle]="{'cursor':selectedPageNumber <= 1 ? 'not-allowed' : 'pointer'}">Prev</button>
+<button mat-button style="margin-left: -30px;" color="primary" [disabled]="selectedPageNumber >= totalPages"
+    (click)="setPage(selectedPageNumber+1)"
+    [ngStyle]="{'cursor':(!dataSource.length || dataSource.length < 6) ? 'not-allowed' : 'pointer'}">Next</button>
